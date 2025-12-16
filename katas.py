@@ -1,4 +1,8 @@
-#contador de letras 1
+'''
+Escribe una función que reciba una cadena de texto como parámetro y devuelva 
+un diccionario con las frecuencias de cada letra en la cadena. 
+Los espacios no deben ser considerados.
+'''
 def contador_letras(texto):
     texto = texto.lower()
     contadores = {}
@@ -10,22 +14,39 @@ def contador_letras(texto):
         else:
             contadores[texto[i]] = 1
     return contadores
-#Multiplicador elementos de lista de enteros con map 2
+'''
+Dada una lista de números, obtén una nueva lista con el doble de cada valor. 
+Usa la función map().'''
 def multiplicador(lista_enteros):
     multiplied_list = list(map( lambda x: x*2, lista_enteros))
     return multiplied_list
-#Comparativa lista de palabras y palabra objetivo 3
+
+'''
+Escribe una función que tome una lista de palabras y una palabra objetivo como parámetros. 
+La función debe devolver una lista con todas las palabras de la lista original 
+que contengan la palabra objetivo.
+'''
 def palabra_en_palabra(lista_palabras, palabra_objetivo):
     lista_resultado = []
     for palabra in lista_palabras:
         if palabra_objetivo.lower() in palabra.lower():
             lista_resultado.append(palabra)
     return lista_resultado
-#Diferencia entre listas usando map() 4
+'''
+Genera una función que calcule la diferencia entre los valores de dos listas.
+Usa la función map().
+'''
 def diferencia_listas(lista_enteros1, lista_enteros2):
     resultado = list(map(lambda x, y: x - y, lista_enteros1, lista_enteros2))
     return resultado
-#Calculadora media 5
+'''
+Escribe una función que tome una lista de números como parámetro y un valor opcional 
+nota_aprobado (por defecto 5). 
+La función debe calcular la media de los números en la lista y determinar si la media 
+es mayor o igual que nota_aprobado. Si es así, el estado será "aprobado"; 
+de lo contrario, "suspenso". 
+La función debe devolver una tupla que contenga la media y el estado.
+'''
 def calculadora_media(lista_notas, nota_aprobado):
     nota_media = sum(lista_notas)/len(lista_notas)
     if nota_media >= nota_aprobado:
