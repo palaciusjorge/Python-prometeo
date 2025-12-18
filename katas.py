@@ -481,7 +481,7 @@ def eliminar_palabra(texto, palabra_a_eliminar):
     palabras = texto.split()
     palabras_filtradas = [palabra for palabra in palabras if palabra.lower() != palabra_a_eliminar.lower()]
     return ' '.join(palabras_filtradas)
-def procesar_texto(texto, opcion, *args):
+def procesar_texto(texto, opcion, *args): #Con un option imprimiendolo por pantalla?
     if opcion == "contar":
         return contar_palabras(texto)
     elif opcion == "reemplazar":
@@ -498,5 +498,107 @@ def procesar_texto(texto, opcion, *args):
 texto_ejemplo = "Hola mundo hola"
 info = procesar_texto(texto_ejemplo, "contar")
 print(info)
+'''
+Genera un programa que nos indique si es de noche, 
+de día o de tarde según la hora proporcionada por el usuario.
+'''
+def what_time_of_day():
+    try:
+        hora = int(input("Introduce la hora (0-23): \n"))
+        if hora < 0 or hora > 23:
+            return "La hora debe estar entre 0 y 23"
+        elif 6 <= hora < 12: #Horario genérico; el horario en España sería de 8:00 a 14:00
+            return "Es por el día"
+        elif 12 <= hora < 20: #Horario genérico; el horario en España sería de 14:00 a 21:00
+            return "Es por la tarde"
+        else:
+            return "Es de noche"
+    except ValueError:
+        return "Debes introducir un número entero entre 0 y 23"
+'''
+Se puede hacer importando datetime para obtener la hora actual
+from datetime import datetime
+current_hour = datetime.now().hour
+'''
+#print(what_time_of_day()) Ejemplo de uso (requiere input)
+'''
+Escribe un programa que determine qué calificación en texto tiene un alumno según su calificación numérica.
+Reglas:
+        0 - 69: insuficiente
+        70 - 79: bien
+        80 - 89: muy bien
+        90 - 100: excelente
+'''
+def calificacion_texto():
+    try:
+        calificacion = float(input("Introduce la calificación numérica (0-100): \n"))
+        if calificacion < 0 or calificacion > 100:
+            return "La calificación debe estar entre 0 y 100"
+        elif calificacion < 70:
+            return "Insuficiente"
+        elif calificacion < 80:
+            return "Bien"
+        elif calificacion < 90:
+            return "Muy bien"
+        else:
+            return "Excelente"
+    except ValueError:
+        return "Debes introducir un número entre 0 y 100"
+#print(calificacion_texto()) Ejemplo de uso (requiere input)
+'''
+Escribe una función que tome dos parámetros: figura (una cadena que puede ser 
+"rectangulo", "circulo" o "triangulo") 
+y datos (una tupla con los datos necesarios para calcular el área de la figura).
+'''
+import math
+def calcular_area(figura, datos):
+    if figura == "rectangulo":
+        if len(datos) != 2:
+            raise ValueError("Se requieren dos datos: base y altura")
+        base, altura = datos
+        return base * altura
+    elif figura == "circulo":
+        if len(datos) != 1:
+            raise ValueError("Se requiere un dato: radio")
+        radio = datos[0]
+        return math.pi * radio ** 2
+    elif figura == "triangulo":
+        if len(datos) != 2:
+            raise ValueError("Se requieren dos datos: base y altura")
+        base, altura = datos
+        return (base * altura) / 2
+    else:
+        raise ValueError("Figura no válida. Usa 'rectangulo', 'circulo' o 'triangulo'.")
+#print(calcular_area("rectangulo", (5, 10))) Ejemplo de uso
+#print(calcular_area("circulo", (7,))) Ejemplo de uso
+#print(calcular_area("triangulo", (4, 8))) Ejemplo de uso
+'''
+Escribe un programa en Python que utilice condicionales para determinar 
+el monto final de una compra en una tienda en línea, después de aplicar un descuento. 
+El programa debe:
+    a. Solicitar al usuario el precio original de un artículo.
+    b. Preguntar si tiene un cupón de descuento (respuesta sí o no).
+    c. Si la respuesta es sí, solicitar el valor del cupón de descuento.
+    d. Aplicar el descuento al precio original, siempre que el valor del cupón sea válido (mayor a cero).
+    e. Mostrar el precio final de la compra, considerando o no el descuento.
+    f. Usar estructuras de control de flujo (if, elif, else) para llevar a cabo las acciones.
+'''
+def calcular_precio_final():
+    try:
+        precio_original = float(input("Introduce el precio original del artículo: \n"))
+        tiene_cupon = input("¿Tienes un cupón de descuento? (si/no): \n").strip().lower()
+        if tiene_cupon == "si":
+            valor_cupon = float(input("Introduce el valor del cupón de descuento: \n"))
+            if valor_cupon > 0:
+                precio_final = precio_original - valor_cupon
+            else:
+                return "El valor del cupón debe ser mayor a cero."
+        elif tiene_cupon == "no":
+            precio_final = precio_original
+        else:
+            return "Respuesta no válida. Debes responder 'si' o 'no'."
+        return f"El precio final de la compra es: {precio_final:.2f}"
+    except ValueError:
+        return "Debes introducir valores numéricos válidos."
+#print(calcular_precio_final()) Ejemplo de uso (requiere input)
 
-    #print(info) Ejemplo de uso
