@@ -515,11 +515,7 @@ def what_time_of_day():
             return "Es de noche"
     except ValueError:
         return "Debes introducir un número entero entre 0 y 23"
-'''
-Se puede hacer importando datetime para obtener la hora actual
-from datetime import datetime
-current_hour = datetime.now().hour
-'''
+
 #print(what_time_of_day()) Ejemplo de uso (requiere input)
 '''
 Escribe un programa que determine qué calificación en texto tiene un alumno según su calificación numérica.
