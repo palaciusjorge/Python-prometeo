@@ -203,6 +203,7 @@ def listado_estudiantes():
         {"nombre": "Carlos", "edad": 21, "calificacion": 78},
     ]
     return lista_estudiantes
+#print(listado_estudiantes()) Ejemplo de uso
 def filtrar_diccionarios(lista_diccionarios_estudiantes):
     lista_filtrada = list(filter(lambda diccionario: diccionario.get("calificacion") >= 90, lista_diccionarios_estudiantes))
     return lista_filtrada
@@ -336,3 +337,166 @@ def sumar_listas(lista1, lista2):
     lista_suma = list(map(lambda x, y: x + y, lista1, lista2))
     return lista_suma
 #print(sumar_listas([1,2,3], [4,5,6])) Ejemplo de uso
+'''
+Crea la clase Arbol
+Define un árbol genérico con un tronco y ramas como atributos.
+Métodos disponibles: 
+crecer_tronco, nueva_rama, crecer_ramas, quitar_rama, 
+info_arbol.
+Código a seguir:
+Inicializar un árbol con un tronco de longitud 1 
+y una lista vacía de ramas.
+Implementar el método crecer_tronco para aumentar 
+la longitud del tronco en una unidad.
+Implementar el método nueva_rama para agregar una 
+nueva rama de longitud 1 a la lista de ramas.
+Implementar el método crecer_ramas para aumentar en 
+una unidad la longitud de todas las ramas existentes.
+Implementar el método quitar_rama para eliminar una 
+rama en una posición específica.
+Implementar el método info_arbol para devolver 
+información sobre la longitud del tronco, 
+el número de ramas y sus longitudes.
+Caso de uso:
+        a. Crear un árbol.
+        b. Hacer crecer el tronco una unidad.
+        c. Añadir una nueva rama.
+        d. Hacer crecer todas las ramas una unidad.
+        e. Añadir dos nuevas ramas.
+        f. Retirar la rama situada en la posición 2.
+        g. Obtener información sobre el árbol.
+'''
+class Arbol:
+    def __init__(self, tronco: int, ramas: list):
+        self.tronco = tronco
+        self.ramas = ramas
+
+    def crecer_tronco(self):
+        self.tronco += 1
+
+    def nueva_rama(self):
+        self.ramas.append(1)
+
+    def crecer_ramas(self):
+        self.ramas = [rama + 1 for rama in self.ramas]
+
+    def quitar_rama(self, posicion):
+        if 0 <= posicion < len(self.ramas):
+            del self.ramas[posicion]
+
+    def info_arbol(self):
+        return {
+            "longitud_tronco": self.tronco,
+            "numero_ramas": len(self.ramas),
+            "longitudes_ramas": self.ramas
+        }
+Arbol_ejemplo = Arbol(1, [])
+Arbol_ejemplo.crecer_tronco()
+Arbol_ejemplo.nueva_rama()
+Arbol_ejemplo.crecer_ramas()
+Arbol_ejemplo.nueva_rama()
+Arbol_ejemplo.nueva_rama()
+Arbol_ejemplo.quitar_rama(2)
+info = Arbol_ejemplo.info_arbol()
+'''
+Doble print porque no había definido el tipo
+de dato en el inicializador y no realizaba el print
+'''
+#print("info:", info) 
+#print(type(info))
+'''
+Crea la clase UsuarioBanco
+Representa a un usuario de un banco con su nombre, saldo y si tiene o no cuenta corriente.
+Métodos: retirar_dinero, transferir_dinero, agregar_dinero.
+Código a seguir:
+Inicializar un usuario con nombre, saldo y un indicador (True o False) de cuenta corriente.
+Implementar retirar_dinero para sustraer dinero del saldo, lanzando un error si no es posible.
+Implementar transferir_dinero para transferir dinero desde otro usuario, lanzando un error en caso de fallo.
+Implementar agregar_dinero para aumentar el saldo del usuario.
+Caso de uso:
+        a. Crear dos usuarios: "Alicia" con saldo inicial de 100 y "Bob" con saldo inicial de 50, ambos con cuenta corriente.
+        b. Agregar 20 unidades al saldo de Bob.
+        c. Transferir 80 unidades de Bob a Alicia.
+        d. Retirar 50 unidades del saldo de Alicia.
+
+'''
+class UsuarioBanco:
+    def __init__(self, nombre: str, saldo: float, cuenta_corriente: bool):
+        self.nombre = nombre
+        self.saldo = saldo
+        self.cuenta_corriente = cuenta_corriente
+    def retirar_dinero(self, cantidad: float):
+        if cantidad > self.saldo:
+            raise ValueError("Fondos insuficientes para retirar")
+        self.saldo -= cantidad
+    def transferir_dinero(self, otro_usuario, cantidad: float):
+        if cantidad > self.saldo:
+            raise ValueError("Fondos insuficientes para transferir")
+        self.saldo -= cantidad
+        otro_usuario.saldo += cantidad
+    def agregar_dinero(self, cantidad: float):
+        self.saldo += cantidad
+    def info_usuario(self):
+        return {
+            "nombre": self.nombre,
+            "saldo": self.saldo,
+            "cuenta_corriente": self.cuenta_corriente
+        }
+#Usuario1 = UsuarioBanco("Alicia", 100, True)
+#Usuario2 = UsuarioBanco("Bob", 50, True)
+#Usuario2.agregar_dinero(20)
+#try:
+    #Usuario2.transferir_dinero(Usuario1, 80)
+#except ValueError as e:
+    #print(e)
+#try:
+    #Usuario1.retirar_dinero(50)
+#except ValueError as e:
+    #print(e)
+#print(Usuario1.info_usuario())
+'''
+Crea una función llamada procesar_texto
+Procesa un texto según la opción especificada: contar_palabras, reemplazar_palabras o eliminar_palabra.
+Código a seguir:
+Crear una función contar_palabras que cuente el número de veces que aparece cada palabra en el texto y devuelva un diccionario.
+Crear una función reemplazar_palabras para sustituir una palabra_original por una palabra_nueva en el texto y devolver el texto modificado.
+Crear una función eliminar_palabra que elimine una palabra del texto y devuelva el texto sin ella.
+Crear la función procesar_texto que reciba un texto, una opción ("contar", "reemplazar", "eliminar") y un número variable de argumentos según la opción elegida.
+Caso de uso:
+Verificar el funcionamiento completo de procesar_texto.
+'''
+def contar_palabras(texto):
+    palabras = texto.split()
+    contador = {}
+    for palabra in palabras:
+        palabra = palabra.lower()
+        if palabra in contador:
+            contador[palabra] += 1
+        else:
+            contador[palabra] = 1
+    return contador
+def reemplazar_palabras(texto, palabra_original, palabra_nueva):
+    return texto.replace(palabra_original, palabra_nueva)
+def eliminar_palabra(texto, palabra_a_eliminar):
+    palabras = texto.split()
+    palabras_filtradas = [palabra for palabra in palabras if palabra.lower() != palabra_a_eliminar.lower()]
+    return ' '.join(palabras_filtradas)
+def procesar_texto(texto, opcion, *args):
+    if opcion == "contar":
+        return contar_palabras(texto)
+    elif opcion == "reemplazar":
+        if len(args) != 2:
+            raise ValueError("Se requieren dos argumentos: palabra_original y palabra_nueva")
+        return reemplazar_palabras(texto, args[0], args[1])
+    elif opcion == "eliminar":
+        if len(args) != 1:
+            raise ValueError("Se requiere un argumento: palabra_a_eliminar")
+        return eliminar_palabra(texto, args[0])
+    else:
+        raise ValueError("Opción no válida. Usa 'contar', 'reemplazar' o 'eliminar'.")
+# Ejemplo de uso:
+texto_ejemplo = "Hola mundo hola"
+info = procesar_texto(texto_ejemplo, "contar")
+print(info)
+
+    #print(info) Ejemplo de uso
